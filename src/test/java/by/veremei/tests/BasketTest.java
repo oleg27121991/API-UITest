@@ -8,7 +8,6 @@ import by.veremei.api.models.book.BooksCollection;
 import by.veremei.api.models.login.SuccessUserLogin;
 import by.veremei.helpers.WithLogin;
 import by.veremei.pages.ProfilePage;
-import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -45,7 +44,6 @@ public class BasketTest extends BaseTest {
         );
         step("Удаляем книгу из коллекции пользователя", () -> {
             profilePage.deleteBookFromUserCollection();
-            Selenide.confirm();
         });
         step("Проверяем что коллекция пуста", () ->
                 profilePage.checkSuccessfulBookDelete(TEXT_NO_ROWS_IN_COLLECTION)
