@@ -10,6 +10,7 @@ import by.veremei.helpers.WithLogin;
 import by.veremei.pages.ProfilePage;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -17,7 +18,7 @@ import java.util.Collections;
 import static by.veremei.data.WebEndpoints.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
-
+@DisplayName("Профиль пользователя")
 public class BasketTest extends BaseTest {
     BooksData booksData = new BooksData();
     AuthorizationAPI authAPI = new AuthorizationAPI();
@@ -25,6 +26,7 @@ public class BasketTest extends BaseTest {
     private final static String TEXT_NO_ROWS_IN_COLLECTION = "No rows found";
 
     @Test
+    @Tag("UI")
     @WithLogin
     @DisplayName("Удаление книги из коллекции пользователя")
     void deleteBookFromUserCollectionTest() {

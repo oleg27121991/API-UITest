@@ -10,6 +10,7 @@ import by.veremei.api.models.login.Login;
 import by.veremei.api.models.login.SuccessUserLogin;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -24,6 +25,7 @@ public class ProfileTest {
     BooksData booksData = new BooksData();
 
     @Test
+    @Tag("API")
     @DisplayName("Добавление книги в коллекцию пользователя")
     void addBookToCollectionTest() {
         Login user = new Login(authData.userName, authData.userPass);
