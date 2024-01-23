@@ -31,8 +31,8 @@ public class BasketTest extends BaseTest {
     @DisplayName("Удаление книги из коллекции пользователя")
     void deleteBookFromUserCollectionTest() {
         SuccessUserLogin successUserLogin = step("Получаем значения тело ответа авторизованного пользователя", () -> authAPI.getSuccessUserLogin());
-        String token = step("Записываем token пользователя в переменную", successUserLogin::token);
-        String userId = step("Записываем userId пользователя в переменную", successUserLogin::userId);
+        String token = step("Записываем token пользователя в переменную", successUserLogin::getToken);
+        String userId = step("Записываем userId пользователя в переменную", successUserLogin::getUserId);
         step("Выполняем запрос на удаление книг из коллекции пользователя", () -> BookstoreAPI.deleteBooks(token, userId));
 
         Book book = new Book(booksData.isbn);

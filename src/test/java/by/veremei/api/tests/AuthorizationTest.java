@@ -23,7 +23,7 @@ public class AuthorizationTest {
         SuccessUserLogin successUserLogin = step("Выполняем запрос на успешную аутентификацию пользователя", () ->
                 AuthorizationAPI.loginUser(user));
         step("Проверяем, что токен не равен null", () ->
-                assertNotNull(successUserLogin.token())
+                assertNotNull(successUserLogin.getToken())
         );
     }
 }

@@ -1,4 +1,11 @@
 package by.veremei.api.models.login;
 
-public record Login(String userName, String password) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Login {
+    private String userName;
+    private String password;
 }

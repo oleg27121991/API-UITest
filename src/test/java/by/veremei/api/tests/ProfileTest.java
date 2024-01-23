@@ -33,8 +33,8 @@ public class ProfileTest {
         SuccessUserLogin successUserLogin = step("Выполняем запрос на успешную аутентификацию пользователя", () ->
                 AuthorizationAPI.loginUser(user));
 
-        String token = step("Записываем в переменную token пользователя", successUserLogin::token);
-        String userId = step("Записываем в переменную id пользователя", successUserLogin::userId);
+        String token = step("Записываем в переменную token пользователя", successUserLogin::getToken);
+        String userId = step("Записываем в переменную id пользователя", successUserLogin::getUserId);
 
         step("Выполняем запрос на удаление книг из коллекции пользователя", () -> BookstoreAPI.deleteBooks(token, userId));
 

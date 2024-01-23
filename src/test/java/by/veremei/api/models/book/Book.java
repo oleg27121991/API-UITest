@@ -1,4 +1,10 @@
 package by.veremei.api.models.book;
 
-public record Book(String isbn) {
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Book {
+    private String isbn;
 }

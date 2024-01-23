@@ -1,6 +1,12 @@
 package by.veremei.api.models.book;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public record BooksCollection(String userId, List<Book> collectionOfIsbns) {
+import java.util.List;
+@Data
+@AllArgsConstructor
+public class BooksCollection {
+    private String userId;
+    private List<Book> collectionOfIsbns;
 }
