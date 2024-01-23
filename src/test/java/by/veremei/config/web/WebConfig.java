@@ -4,10 +4,8 @@ import org.aeonbits.owner.Config;
 
 import java.net.URL;
 
-@Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:properties",
-        "classpath:config/app.properties"
+        "classpath:${env}.properties"
 })
 public interface WebConfig extends Config {
     @Key("baseUrl")
@@ -16,7 +14,7 @@ public interface WebConfig extends Config {
 
     @Key("browser")
     @DefaultValue("chrome")
-    Browser getBrowser();
+    String browser();
 
     @Key("browserVersion")
     @DefaultValue("118.0")
@@ -32,5 +30,5 @@ public interface WebConfig extends Config {
 
     @Key("remoteUrl")
     @DefaultValue("https://user1:1234@selenoid.autotests.cloud/wd/hub")
-    URL getRemoteUrl();
+    URL remoteUrl();
 }

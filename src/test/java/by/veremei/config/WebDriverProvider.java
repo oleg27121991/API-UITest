@@ -1,5 +1,6 @@
 package by.veremei.config;
 
+import by.veremei.config.web.Browser;
 import by.veremei.config.web.WebConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class WebDriverProvider implements Supplier<WebDriver> {
@@ -23,34 +25,21 @@ public class WebDriverProvider implements Supplier<WebDriver> {
     }
 
     private WebDriver createWebDriver() {
-        if (!webConfig.isRemote()) {
-            return createLocalWebDriver();
-        } else {
-            return createRemoteWebDriver();
-        }
-    }
-
-    private WebDriver createLocalWebDriver() {
-        switch (webConfig.getBrowser()) {
-            case CHROME:
+        if (Objects.isNull(webConfig.remoteUrl())) {
+            if (webConfig.browser().equals(Browser.CHROME.toString())) {
                 WebDriverManager.chromedriver().setup();
                 return new ChromeDriver();
-            case FIREFOX:
+            } else if (webConfig.browser().equals(Browser.FIREFOX.toString())) {
                 WebDriverManager.firefoxdriver().setup();
                 return new FirefoxDriver();
-            default:
-                throw new IllegalArgumentException("No such browser: " + webConfig.getBrowser());
+            }
+        } else {
+            if (webConfig.browser().equals(Browser.CHROME.toString())) {
+                return new RemoteWebDriver(webConfig.remoteUrl(), new ChromeOptions());
+            } else if (webConfig.browser().equals(Browser.FIREFOX.toString())) {
+                return new RemoteWebDriver(webConfig.remoteUrl(), new FirefoxOptions());
+            }
         }
-    }
-
-    private WebDriver createRemoteWebDriver() {
-        switch (webConfig.getBrowser()) {
-            case CHROME:
-                return new RemoteWebDriver(webConfig.getRemoteUrl(), new ChromeOptions());
-            case FIREFOX:
-                return new RemoteWebDriver(webConfig.getRemoteUrl(), new FirefoxOptions());
-            default:
-                throw new IllegalArgumentException("No such browser: " + webConfig.getBrowser());
-        }
+        throw new RuntimeException("No such browser");
     }
 }

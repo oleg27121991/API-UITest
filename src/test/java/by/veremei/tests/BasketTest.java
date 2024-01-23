@@ -45,7 +45,7 @@ public class BasketTest extends BaseTest {
         );
         step("Удаляем книгу из коллекции пользователя", () -> {
             profilePage.deleteBookFromUserCollection();
-            Selenide.dismiss();
+            Selenide.confirm();
         });
         step("Проверяем что коллекция пуста", () ->
                 profilePage.checkSuccessfulBookDelete(TEXT_NO_ROWS_IN_COLLECTION)
