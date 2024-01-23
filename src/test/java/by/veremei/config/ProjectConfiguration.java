@@ -16,11 +16,11 @@ public class ProjectConfiguration {
 
     public void webConfig() {
         Configuration.baseUrl = webConfig.baseUrl();
-        Configuration.browser = webConfig.browser().toString();
+        Configuration.browser = webConfig.getBrowser().toString();
         Configuration.browserVersion = webConfig.browserVersion();
         Configuration.browserSize = webConfig.browserSize();
         if (webConfig.isRemote()) {
-            Configuration.remote = String.valueOf(webConfig.remoteUrl());
+            Configuration.remote = String.valueOf(webConfig.getRemoteUrl());
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("selenoid:options", Map.<String, Object>of(
                     "enableVNC", true,
