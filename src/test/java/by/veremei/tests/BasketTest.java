@@ -29,7 +29,7 @@ public class BasketTest extends BaseTest {
     @WithLogin
     @DisplayName("Удаление книги из коллекции пользователя")
     void deleteBookFromUserCollectionTest() {
-        SuccessUserLogin successUserLogin = step("Получаем значения тело ответа авторизованного пользователя", () -> authAPI.getSuccessUserLogin());
+        SuccessUserLogin successUserLogin = step("Получаем значения из тела ответа авторизованного пользователя", () -> authAPI.getSuccessUserLogin());
         String token = step("Записываем token пользователя в переменную", successUserLogin::getToken);
         String userId = step("Записываем userId пользователя в переменную", successUserLogin::getUserId);
         step("Выполняем запрос на удаление книг из коллекции пользователя", () -> BookstoreAPI.deleteBooks(token, userId));
@@ -43,7 +43,8 @@ public class BasketTest extends BaseTest {
                 open(USER_PROFILE_URL)
         );
         step("Удаляем книгу из коллекции пользователя", () -> {
-            profilePage.deleteBookFromUserCollection();
+                profilePage.deleteBookFromUserCollection();
+                switchTo().alert().accept();
         });
         step("Проверяем что коллекция пуста", () ->
                 profilePage.checkSuccessfulBookDelete(TEXT_NO_ROWS_IN_COLLECTION)
