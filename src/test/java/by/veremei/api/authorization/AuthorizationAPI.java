@@ -5,18 +5,16 @@ import by.veremei.api.data.AuthData;
 import by.veremei.api.models.login.Login;
 import by.veremei.api.models.login.SuccessUserLogin;
 import by.veremei.api.spec.Specifications;
-import by.veremei.tests.BaseTest;
 import com.codeborne.selenide.WebDriverRunner;
 import io.restassured.response.Response;
 import org.openqa.selenium.Cookie;
 
 import static by.veremei.api.data.ApiEndpoint.*;
 import static com.codeborne.selenide.Selenide.open;
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 
-public class AuthorizationAPI extends BaseTest {
+public class AuthorizationAPI {
     AuthData logData = new AuthData();
     private static final String USER_ID_COOKIE_NAME = "userID";
     private static final String EXPIRES_COOKIE_NAME = "expires";
@@ -35,7 +33,7 @@ public class AuthorizationAPI extends BaseTest {
                 .then()
                 .extract().response();
 
-        open(BASE_URL + IMG_FOR_SET_COOKIES);
+        open(IMG_FOR_SET_COOKIES);
 
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie(USER_ID_COOKIE_NAME, authResponse.path(USER_ID_RESPONSE)));
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie(EXPIRES_COOKIE_NAME, authResponse.path(EXPIRES_RESPONSE)));
