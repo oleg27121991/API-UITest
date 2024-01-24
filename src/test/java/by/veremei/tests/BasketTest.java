@@ -40,7 +40,7 @@ public class BasketTest extends BaseTest {
         step("Выполняем запрос на добавление книги в коллекцию пользователя", () -> BookstoreAPI.addBookToCollection(token, bookData));
 
         step("Открываем страницу профиль пользователя", () ->
-                open(USER_PROFILE_URL)
+                open(BASE_URL + USER_PROFILE_URL)
         );
         step("Удаляем книгу из коллекции пользователя", () ->
                 profilePage.deleteBookFromUserCollection()

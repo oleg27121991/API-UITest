@@ -5,17 +5,18 @@ import by.veremei.api.data.AuthData;
 import by.veremei.api.models.login.Login;
 import by.veremei.api.models.login.SuccessUserLogin;
 import by.veremei.api.spec.Specifications;
+import by.veremei.tests.BaseTest;
 import com.codeborne.selenide.WebDriverRunner;
 import io.restassured.response.Response;
 import org.openqa.selenium.Cookie;
 
-import static by.veremei.api.data.ApiEndpoint.IMG_FOR_SET_COOKIES;
-import static by.veremei.api.data.ApiEndpoint.POST_USER_LOGIN_URL;
+import static by.veremei.api.data.ApiEndpoint.*;
 import static com.codeborne.selenide.Selenide.open;
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 
-public class AuthorizationAPI {
+public class AuthorizationAPI extends BaseTest {
     AuthData logData = new AuthData();
     private static final String USER_ID_COOKIE_NAME = "userID";
     private static final String EXPIRES_COOKIE_NAME = "expires";
@@ -25,7 +26,7 @@ public class AuthorizationAPI {
     private static final String EXPIRES_RESPONSE = "expires";
     public SuccessUserLogin setAuthorizationCookies() {
         Login user = new Login(logData.userName, logData.userPass);
-        Specifications.installSpecification(Specifications.requestSpec(ApiEndpoint.BASE_URL), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecOK200());
         Response authResponse = given()
                 .contentType(JSON)
                 .body(user)
@@ -34,7 +35,7 @@ public class AuthorizationAPI {
                 .then()
                 .extract().response();
 
-        open(IMG_FOR_SET_COOKIES);
+        open(BASE_URL + IMG_FOR_SET_COOKIES);
 
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie(USER_ID_COOKIE_NAME, authResponse.path(USER_ID_RESPONSE)));
         WebDriverRunner.getWebDriver().manage().addCookie(new Cookie(EXPIRES_COOKIE_NAME, authResponse.path(EXPIRES_RESPONSE)));
@@ -50,7 +51,7 @@ public class AuthorizationAPI {
 
 
     public static SuccessUserLogin loginUser(Login user) {
-        Specifications.installSpecification(Specifications.requestSpec(ApiEndpoint.BASE_URL), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecOK200());
         return given()
                 .body(user)
                 .when()

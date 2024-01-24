@@ -5,6 +5,7 @@ import by.veremei.api.spec.Specifications;
 import io.restassured.response.Response;
 
 import static by.veremei.api.data.ApiEndpoint.*;
+import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
 public class BookstoreAPI {
