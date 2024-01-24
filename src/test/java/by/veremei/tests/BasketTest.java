@@ -42,9 +42,9 @@ public class BasketTest extends BaseTest {
         step("Открываем страницу профиль пользователя", () ->
                 open(USER_PROFILE_URL)
         );
-        step("Удаляем книгу из коллекции пользователя", () -> {
-                profilePage.deleteBookFromUserCollection();
-        });
+        step("Удаляем книгу из коллекции пользователя", () ->
+                profilePage.deleteBookFromUserCollection()
+        );
         step("Проверяем что коллекция пуста", () ->
                 profilePage.checkSuccessfulBookDelete(TEXT_NO_ROWS_IN_COLLECTION)
         );

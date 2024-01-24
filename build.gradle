@@ -4,12 +4,6 @@ plugins {
     id('io.qameta.allure') version '2.11.2'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
-}
-
 group "com.veremeioleg"
 version "1.0-SNAPSHOT"
 
@@ -59,7 +53,6 @@ dependencies {
     testRuntimeOnly (
             "org.slf4j:slf4j-simple:$slf4jVersion")
 }
-
 
 tasks.withType(Test) {
     systemProperties(System.getProperties())
