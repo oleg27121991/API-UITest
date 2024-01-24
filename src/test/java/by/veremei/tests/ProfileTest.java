@@ -17,8 +17,8 @@ import java.util.Collections;
 import static by.veremei.data.WebEndpoints.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
-@DisplayName("Профиль пользователя")
-public class BasketTest extends BaseTest {
+@DisplayName("UI tests")
+public class ProfileTest extends BaseTest {
     BooksData booksData = new BooksData();
     AuthorizationAPI authAPI = new AuthorizationAPI();
     ProfilePage profilePage = new ProfilePage();

@@ -5,7 +5,7 @@ import org.aeonbits.owner.Config;
 import java.net.URL;
 
 @Config.Sources({
-        "classpath:${env}.properties"
+        "classpath:config/${env}.properties"
 })
 public interface WebConfig extends Config {
     @Key("baseUrl")
@@ -17,7 +17,7 @@ public interface WebConfig extends Config {
     String browser();
 
     @Key("browserVersion")
-    @DefaultValue("118.0")
+    @DefaultValue("100.0")
     String browserVersion();
 
     @Key("browserSize")
