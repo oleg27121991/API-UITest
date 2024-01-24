@@ -44,7 +44,6 @@ public class BasketTest extends BaseTest {
         );
         step("Удаляем книгу из коллекции пользователя", () -> {
                 profilePage.deleteBookFromUserCollection();
-                switchTo().alert().accept();
         });
         step("Проверяем что коллекция пуста", () ->
                 profilePage.checkSuccessfulBookDelete(TEXT_NO_ROWS_IN_COLLECTION)
