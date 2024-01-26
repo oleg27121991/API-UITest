@@ -10,6 +10,7 @@ import io.restassured.response.Response;
 import org.openqa.selenium.Cookie;
 
 import static by.veremei.api.data.ApiEndpoint.*;
+import static by.veremei.tests.BaseTest.BASE_URI;
 import static com.codeborne.selenide.Selenide.open;
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
@@ -24,7 +25,7 @@ public class AuthorizationAPI {
     private static final String EXPIRES_RESPONSE = "expires";
     public SuccessUserLogin setAuthorizationCookies() {
         Login user = new Login(logData.userName, logData.userPass);
-        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URI), Specifications.responseSpecOK200());
         Response authResponse = given()
                 .contentType(JSON)
                 .body(user)
@@ -49,7 +50,7 @@ public class AuthorizationAPI {
 
 
     public static SuccessUserLogin loginUser(Login user) {
-        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecOK200());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URI), Specifications.responseSpecOK200());
         return given()
                 .body(user)
                 .when()

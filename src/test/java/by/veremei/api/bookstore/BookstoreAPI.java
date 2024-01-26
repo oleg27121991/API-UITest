@@ -6,10 +6,11 @@ import io.restassured.response.Response;
 
 import static by.veremei.api.data.ApiEndpoint.*;
 import static io.restassured.RestAssured.given;
+import static by.veremei.tests.BaseTest.BASE_URI;
 
 public class BookstoreAPI {
     public static Response deleteBooks(String token, String userId) {
-        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecDelete204());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URI), Specifications.responseSpecDelete204());
         return given()
                 .header("Authorization", "Bearer " + token)
                 .queryParams("UserId", userId)
@@ -21,7 +22,7 @@ public class BookstoreAPI {
     }
 
     public static Response addBookToCollection(String token, BooksCollection book) {
-        Specifications.installSpecification(Specifications.requestSpec(BASE_URL), Specifications.responseSpecCreated201());
+        Specifications.installSpecification(Specifications.requestSpec(BASE_URI), Specifications.responseSpecCreated201());
         return given()
                 .header("Authorization", "Bearer " + token)
                 .body(book)
